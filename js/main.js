@@ -31,6 +31,8 @@ function main() {
 
     () => {
 
+      createEventListeners();
+
       Momo.createLoop(
 
         () => {
@@ -834,6 +836,96 @@ function displayError(message) {
   alert("Error: " + message + "!");
 
   throw new Error("Error: " + message + "!");
+}
+
+function createEventListeners() {
+
+  let canvas = Momo.getCanvas();
+
+  canvas.addEventListener("click", toggleFullscreen);
+
+  document.addEventListener("fullscreenchange", manageFullscreenChange);
+  document.addEventListener("MSFullscreenChange", manageFullscreenChange);
+  document.addEventListener("mozfullscreenchange", manageFullscreenChange);
+  document.addEventListener("webkitfullscreenchange", manageFullscreenChange);
+}
+
+function toggleFullscreen() {
+
+  let fullscreen_element = undefined;
+
+  let standard = !!document.fullscreenElement;
+  let webkit = !!document.webkitFullscreenElement;
+  let moz = !!document.mozFullScreenElement;
+  let ms = !!document.msFullscreenElement;
+
+  fullscreen_element = standard || webkit || moz || ms;
+
+  if (fullscreen_element) {
+
+    // Exit fullscreen.
+
+    if (document.exitFullscreen) {
+
+      document.exitFullscreen();
+    }
+    else if (document.webkitExitFullscreen) {
+
+      document.webkitExitFullscreen();
+    }
+    else if (document.mozCancelFullScreen) {
+
+      document.mozCancelFullScreen();
+    }
+    else if (document.msFullscreenElement) {
+
+      document.msFullscreenElement();
+    }
+  }
+  else {
+
+    // Enter fullscreen.
+
+    let canvas = Momo.getCanvas();
+
+    if (canvas.requestFullscreen) {
+
+      canvas.requestFullscreen();
+    }
+    else if (canvas.webkitRequestFullScreen) {
+
+      canvas.webkitRequestFullScreen();
+    }
+    else if (canvas.mozRequestFullScreen) {
+
+      canvas.mozRequestFullScreen();
+    }
+    else if (canvas.msRequestFullScreen) {
+
+      canvas.msRequestFullScreen();
+    }
+  }
+}
+
+function manageFullscreenChange() {
+
+  let fullscreen_element = undefined;
+
+  let standard = !!document.fullscreenElement;
+  let webkit = !!document.webkitFullscreenElement;
+  let moz = !!document.mozFullScreenElement;
+  let ms = !!document.msFullscreenElement;
+
+  fullscreen_element = standard || webkit || moz || ms;
+
+  if (fullscreen_element) {
+
+    Momo.resizeCanvas(window.innerWidth, window.innerHeight);
+  }
+  else {
+
+    Momo.resizeCanvas(768, 448);
+  }
 }
 
 Momo.setEntryPoint(main);
