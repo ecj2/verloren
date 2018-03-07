@@ -1,6 +1,6 @@
 function main() {
 
-  if (!Momo.initialize() || !Momo.setCanvas("game", 768, 448)) {
+  if (!Momo.initialize() || !Momo.setCanvas("game", screen_width, screen_height)) {
 
     displayError("A critical error has occurred!");
   }
@@ -398,6 +398,9 @@ function updateEnemies() {
 
 function render() {
 
+  let offset_x = Momo.getCanvasWidth() / 2 - screen_width / 2;
+  let offset_y = Momo.getCanvasHeight() / 2 - screen_height / 2;
+
   switch (state) {
 
     case INTRO:
@@ -432,9 +435,9 @@ function render() {
 
           16,
 
-          8,
+          offset_x + 8,
 
-          8 + (24 * i),
+          offset_y + 8 + (24 * i),
 
           "left",
 
@@ -450,9 +453,9 @@ function render() {
 
         16,
 
-        182,
+        offset_x + 182,
 
-        32,
+        offset_y + 32,
 
         "left",
 
@@ -467,9 +470,9 @@ function render() {
 
         16,
 
-        8,
+        offset_x + 8,
 
-        8 + 24 * 13,
+        offset_y + 8 + 24 * 13,
 
         "left",
 
@@ -647,9 +650,9 @@ function render() {
 
           16,
 
-          8,
+          offset_x + 8,
 
-          8 + (24 * win_index),
+          offset_y + 8 + (24 * win_index),
 
           "left",
 
@@ -665,9 +668,9 @@ function render() {
 
         16,
 
-        592,
+        offset_x + 592,
 
-        32,
+        offset_y + 32,
 
         "left",
 
@@ -682,9 +685,9 @@ function render() {
 
         16,
 
-        8,
+        offset_x + 8,
 
-        8 + (24 * 4),
+        offset_y + 8 + (24 * 4),
 
         "left",
 
@@ -699,9 +702,9 @@ function render() {
 
         16,
 
-        8,
+        offset_x + 8,
 
-        8 + (24 * 14),
+        offset_y + 8 + (24 * 14),
 
         "left",
 
@@ -747,9 +750,9 @@ function render() {
 
           16,
 
-          8,
+          offset_x + 8,
 
-          8 + (24 * index),
+          offset_y + 8 + (24 * index),
 
           "left",
 
@@ -765,9 +768,9 @@ function render() {
 
         16,
 
-        8,
+        offset_x + 8,
 
-        8,
+        offset_y + 8,
 
         "left",
 
@@ -782,9 +785,9 @@ function render() {
 
         16,
 
-        8,
+        offset_x + 8,
 
-        8 + (24 * 6),
+        offset_y + 8 + (24 * 6),
 
         "left",
 
